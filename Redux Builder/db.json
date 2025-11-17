@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "b682",
+      "name": "Heet",
+      "age": "20",
+      "city": "Rajkot",
+      "subject": "React",
+      "gender": "Male"
+    }
+  ]
+}
