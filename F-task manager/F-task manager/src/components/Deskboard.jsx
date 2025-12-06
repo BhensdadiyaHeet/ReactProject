@@ -105,6 +105,8 @@ export default function Deskboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-slate-800">Welcome{userData?.name ? `, ${userData.name}` : ''}</h1>
+            {/* <img src={userData && userData.photo} alt="" /> */}
+            <img src={userData?.photo ? userData.photo : "https://img.freepik.com/premium-vector/business-man-avatar-profile_1133257-2431.jpg?semt=ais_hybrid&w=740&q=80"} alt="" />
             <p className="text-sm text-slate-600">Simple task list</p>
           </div>
           <div className="flex items-center gap-3">

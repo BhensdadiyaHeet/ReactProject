@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebaseConfig'
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
+import { auth, db, provider } from '../../firebaseConfig'
+import { doc, setDoc } from 'firebase/firestore'
 
 export default function Login() {
   const [formdata, setFormdata] = useState({})
@@ -24,6 +25,14 @@ export default function Login() {
     }
   }
 
+  const handleSignIn = async () => {
+    await signInWithPopup(auth, provider).then((res)=>{
+      console.log(res)
+      setDoc(doc(db, 'Users', res.user.uid), {name: res.user.displayName, email: res.user.email, photo: res.user.photoURL})
+      navigate('/deskboard')
+    })
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center app-container">
       <div className="w-full max-w-md card p-6">
@@ -43,6 +52,8 @@ export default function Login() {
 
           <p className="text-sm text-slate-600 text-center">Don't have an account? <Link to="/" className="text-indigo-600 underline">Register</Link></p>
         </div>
+        <br/>
+        <button onClick={handleSignIn}>Continue with Google</button>
       </div>
     </div>
   )
